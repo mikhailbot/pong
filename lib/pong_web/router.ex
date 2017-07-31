@@ -17,10 +17,7 @@ defmodule PongWeb.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
-  end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", PongWeb do
-  #   pipe_through :api
-  # end
+    resources "/hosts", HostController
+  end
 end

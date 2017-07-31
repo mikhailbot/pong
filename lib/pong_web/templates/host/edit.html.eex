@@ -1,0 +1,5 @@
+<h2>Edit Host</h2>
+
+<%= render "form.html", Map.put(assigns, :action, host_path(@conn, :update, @host)) %>
+
+<span><%= link "Back", to: host_path(@conn, :index) %></span>

@@ -1,0 +1,33 @@
+<h2>Show Host</h2>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @host.name %>
+  </li>
+
+  <li>
+    <strong>Ip address:</strong>
+    <%= @host.ip_address %>
+  </li>
+
+  <li>
+    <strong>Status:</strong>
+    <%= @host.status %>
+  </li>
+
+  <li>
+    <strong>Latency:</strong>
+    <%= @host.latency %>
+  </li>
+
+  <li>
+    <strong>Check frequency:</strong>
+    <%= @host.check_frequency %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: host_path(@conn, :edit, @host) %></span>
+<span><%= link "Back", to: host_path(@conn, :index) %></span>
