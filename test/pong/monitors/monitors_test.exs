@@ -6,8 +6,8 @@ defmodule Pong.MonitorsTest do
   describe "hosts" do
     alias Pong.Monitors.Host
 
-    @valid_attrs %{check_frequency: 42, ip_address: "some ip_address", latency: 42, name: "some name", status: "some status"}
-    @update_attrs %{check_frequency: 43, ip_address: "some updated ip_address", latency: 43, name: "some updated name", status: "some updated status"}
+    @valid_attrs %{check_frequency: 42, ip_address: "8.8.8.8", latency: 42, name: "some name", status: "some status"}
+    @update_attrs %{check_frequency: 43, ip_address: "8.8.4.4", latency: 43, name: "some updated name", status: "some updated status"}
     @invalid_attrs %{check_frequency: nil, ip_address: nil, latency: nil, name: nil, status: nil}
 
     def host_fixture(attrs \\ %{}) do
@@ -32,10 +32,8 @@ defmodule Pong.MonitorsTest do
     test "create_host/1 with valid data creates a host" do
       assert {:ok, %Host{} = host} = Monitors.create_host(@valid_attrs)
       assert host.check_frequency == 42
-      assert host.ip_address == "some ip_address"
-      assert host.latency == 42
+      assert host.ip_address == "8.8.8.8"
       assert host.name == "some name"
-      assert host.status == "some status"
     end
 
     test "create_host/1 with invalid data returns error changeset" do
@@ -47,10 +45,8 @@ defmodule Pong.MonitorsTest do
       assert {:ok, host} = Monitors.update_host(host, @update_attrs)
       assert %Host{} = host
       assert host.check_frequency == 43
-      assert host.ip_address == "some updated ip_address"
-      assert host.latency == 43
+      assert host.ip_address == "8.8.4.4"
       assert host.name == "some updated name"
-      assert host.status == "some updated status"
     end
 
     test "update_host/2 with invalid data returns error changeset" do

@@ -3,8 +3,8 @@ defmodule PongWeb.HostControllerTest do
 
   alias Pong.Monitors
 
-  @create_attrs %{check_frequency: 42, ip_address: "some ip_address", latency: 42, name: "some name", status: "some status"}
-  @update_attrs %{check_frequency: 43, ip_address: "some updated ip_address", latency: 43, name: "some updated name", status: "some updated status"}
+  @create_attrs %{check_frequency: 42, ip_address: "8.8.8.8", latency: 42, name: "some name", status: "some status"}
+  @update_attrs %{check_frequency: 43, ip_address: "8.8.4.4", latency: 43, name: "some updated name", status: "some updated status"}
   @invalid_attrs %{check_frequency: nil, ip_address: nil, latency: nil, name: nil, status: nil}
 
   def fixture(:host) do
@@ -60,7 +60,7 @@ defmodule PongWeb.HostControllerTest do
       assert redirected_to(conn) == host_path(conn, :show, host)
 
       conn = get conn, host_path(conn, :show, host)
-      assert html_response(conn, 200) =~ "some updated ip_address"
+      assert html_response(conn, 200) =~ "8.8.4.4"
     end
 
     test "renders errors when data is invalid", %{conn: conn, host: host} do
