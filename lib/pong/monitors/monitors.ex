@@ -6,7 +6,7 @@ defmodule Pong.Monitors do
   import Ecto.Query, warn: false
   alias Pong.Repo
 
-  alias Pong.Monitors.Host
+  alias Pong.Monitors.{Host, Scheduler}
 
   @doc """
   Returns the list of hosts.
@@ -100,5 +100,17 @@ defmodule Pong.Monitors do
   """
   def change_host(%Host{} = host) do
     Host.changeset(host, %{})
+  end
+
+  @doc """
+  Adds all hosts to the GenServer Scheduler
+  """
+  def schedule_all_hosts do
+    for host <- Repo.all(Host), do: schedule_host(host)
+  end
+
+  def schedule_host(%Host{} = host) do
+    IO.puts "SCHEDULING #{host.ip_address}"
+    Scheduler.schedule_ping(host)
   end
 end

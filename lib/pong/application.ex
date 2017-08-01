@@ -14,6 +14,7 @@ defmodule Pong.Application do
       supervisor(PongWeb.Endpoint, []),
       # Start your own worker by calling: Pong.Worker.start_link(arg1, arg2, arg3)
       # worker(Pong.Worker, [arg1, arg2, arg3]),
+      worker(Pong.Monitors.Scheduler, [[name: :scheduler]])
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
