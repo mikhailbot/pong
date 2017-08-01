@@ -1,6 +1,9 @@
 defmodule Pong.Monitors.Scheduler do
   use GenServer
 
+  alias Pong.Monitors
+  alias Pong.Monitors.Ping
+
   # Client API
 
   def start_link(_options \\ []) do
@@ -13,11 +16,26 @@ defmodule Pong.Monitors.Scheduler do
 
   # Server API
   def init(_args) do
-    Pong.Monitors.schedule_all_hosts()
+    schedule_work()
     {:ok, []}
   end
 
-  def handle_cast({:schedule, host}, state) do
-    {:noreply, [host | state]}
+  def handle_info(:ping, state) do
+    hosts = Monitors.list_hosts
+
+    for host <- hosts do
+      case Ping.check_host(host.ip_address) do
+        {:ok, {true, latency}} -> IO.puts "UP @ #{latency}"
+        {:ok, {false, latency}} -> IO.puts "DOWN @ #{latency}"
+        {:error, e} -> IO.puts "ERROR"
+      end
+    end
+
+    schedule_work()
+    {:noreply, state}
+  end
+
+  defp schedule_work do
+    Process.send_after(self(), :ping, 10 * 1000) # In 10 seconds
   end
 end
