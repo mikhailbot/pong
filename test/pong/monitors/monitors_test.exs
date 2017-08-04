@@ -1,4 +1,7 @@
 defmodule Pong.MonitorsTest do
+  @moduledoc """
+  """
+
   use Pong.DataCase
 
   alias Pong.Monitors
@@ -9,6 +12,7 @@ defmodule Pong.MonitorsTest do
     @valid_attrs %{check_frequency: 42, ip_address: "8.8.8.8", latency: 42, name: "some name", status: "some status"}
     @update_attrs %{check_frequency: 43, ip_address: "8.8.4.4", latency: 43, name: "some updated name", status: "some updated status"}
     @invalid_attrs %{check_frequency: nil, ip_address: nil, latency: nil, name: nil, status: nil}
+    @status_attrs %{latency: 44, status: "up"}
 
     def host_fixture(attrs \\ %{}) do
       {:ok, host} =
@@ -64,6 +68,14 @@ defmodule Pong.MonitorsTest do
     test "change_host/1 returns a host changeset" do
       host = host_fixture()
       assert %Ecto.Changeset{} = Monitors.change_host(host)
+    end
+
+    test "update_status/2 with valid data updates the host" do
+      host = host_fixture()
+      assert {:ok, host} = Monitors.update_status(host, @status_attrs)
+      assert %Host{} = host
+      assert host.latency == 44
+      assert host.status == "up"
     end
   end
 end

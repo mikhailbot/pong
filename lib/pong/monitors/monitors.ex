@@ -1,12 +1,12 @@
 defmodule Pong.Monitors do
   @moduledoc """
-  The Monitors context.
+  Monitors Context
   """
 
   import Ecto.Query, warn: false
-  alias Pong.Repo
 
-  alias Pong.Monitors.{Host, Scheduler}
+  alias Pong.Repo
+  alias Pong.Monitors.Host
 
   @doc """
   Returns the list of hosts.
@@ -102,4 +102,9 @@ defmodule Pong.Monitors do
     Host.changeset(host, %{})
   end
 
+  def update_status(%Host{} = host, attr) do
+    host
+    |>Host.status_changeset(attr)
+    |>Repo.update()
+  end
 end

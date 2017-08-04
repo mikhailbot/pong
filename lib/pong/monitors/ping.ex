@@ -5,13 +5,7 @@ defmodule Pong.Monitors.Ping do
   """
 
   def ping_args(ip) do
-    wait_opt = if darwin?(), do: '-W', else: '-w'
-    ["-c", "1", wait_opt, "5", ip]
-  end
-
-  def darwin? do
-    {output, 0} = System.cmd("uname", [])
-    String.rstrip(output) == "Darwin"
+    ["-c", "1", "-t", "5", ip]
   end
 
   def check_host(ip_address) do
@@ -24,8 +18,8 @@ defmodule Pong.Monitors.Ping do
       alive? = not Regex.match?(~r/100(\.0)?% packet loss/, cmd_output)
 
       latency =
-        case Regex.run(~r/stddev = (.*?)\//, cmd_output) do
-          [ _ | timeout ] -> String.to_float(Enum.fetch!(timeout, 0))
+        case Regex.run(~r/(?<=time=)(.*)(?=\.)/, cmd_output) do
+          [ _ | timeout ] -> String.to_integer(Enum.fetch!(timeout, 0))
           _ -> 0
         end
 

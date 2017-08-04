@@ -1,4 +1,8 @@
 defmodule Pong.Monitors.Host do
+  @moduledoc """
+  Schema and changesets for Hosts
+  """
+
   use Ecto.Schema
   import Ecto.Changeset
   alias Pong.Monitors.Host
@@ -20,5 +24,11 @@ defmodule Pong.Monitors.Host do
     |> cast(attrs, [:name, :ip_address, :check_frequency])
     |> validate_required([:name, :ip_address])
     |> unique_constraint(:ip_address)
+  end
+
+  @doc false
+  def status_changeset(%Host{} = host, attrs) do
+    host
+    |> cast(attrs, [:latency, :status])
   end
 end
