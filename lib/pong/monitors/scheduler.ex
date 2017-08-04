@@ -27,7 +27,7 @@ defmodule Pong.Monitors.Scheduler do
       case Ping.check_host(host.ip_address) do
         {:ok, {true, latency}} -> IO.puts "UP @ #{latency}"
         {:ok, {false, latency}} -> IO.puts "DOWN @ #{latency}"
-        {:error, e} -> IO.puts "ERROR"
+        {:error, e} -> IO.puts "ERROR #{e}"
       end
     end
 
