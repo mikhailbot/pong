@@ -17,7 +17,7 @@ defmodule Pong.Monitors.Check do
   @doc false
   def changeset(%Check{} = check, attrs) do
     check
-    |> cast(attrs, [:latency])
-    |> validate_required([:latency])
+    |> cast(attrs, [:host_id, :latency])
+    |> validate_required([:host_id, :latency])
   end
 end

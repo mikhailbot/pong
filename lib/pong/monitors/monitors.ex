@@ -114,9 +114,14 @@ defmodule Pong.Monitors do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_check(attrs \\ %{}) do
-    %Check{}
-    |> Check.changeset(attrs)
-    |> Repo.insert()
+  def create_check(%Host{} = host, attrs \\ %{}) do
+    attrs =
+      attrs
+      |> Map.put(:host_id, host.id)
+
+    with changeset <- Check.changeset(%Check{}, attrs),
+        {:ok, check} <- Repo.insert(changeset) do
+        {:ok, check}
+    end
   end
 end

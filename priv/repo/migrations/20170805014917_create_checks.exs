@@ -6,7 +6,7 @@ defmodule Pong.Repo.Migrations.CreateChecks do
   use Ecto.Migration
 
   def change do
-    create table(:check) do
+    create table(:checks) do
       add :host_id, references(:hosts)
       add :latency, :integer
 
