@@ -30,5 +30,6 @@ defmodule Pong.Monitors.Host do
   def status_changeset(%Host{} = host, attrs) do
     host
     |> cast(attrs, [:latency, :status])
+    |> validate_required([:latency, :status])
   end
 end

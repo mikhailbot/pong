@@ -13,6 +13,7 @@ defmodule Pong.MonitorsTest do
     @update_attrs %{check_frequency: 43, ip_address: "8.8.4.4", latency: 43, name: "some updated name", status: "some updated status"}
     @invalid_attrs %{check_frequency: nil, ip_address: nil, latency: nil, name: nil, status: nil}
     @status_attrs %{latency: 44, status: "up"}
+    @status_invalid_attrs %{latency: "44", status: 44}
 
     def host_fixture(attrs \\ %{}) do
       {:ok, host} =
@@ -76,6 +77,12 @@ defmodule Pong.MonitorsTest do
       assert %Host{} = host
       assert host.latency == 44
       assert host.status == "up"
+    end
+
+    test "update_status/2 with invalid data returns error changeset" do
+      host = host_fixture()
+      assert {:error, %Ecto.Changeset{}} = Monitors.update_status(host, @status_invalid_attrs)
+      assert host == Monitors.get_host!(host.id)
     end
   end
 end

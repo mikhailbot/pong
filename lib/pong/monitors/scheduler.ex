@@ -29,8 +29,8 @@ defmodule Pong.Monitors.Scheduler do
 
     for host <- hosts do
       case Ping.check_host(host.ip_address) do
-        {:ok, {true, latency}} -> Monitors.update_status(host, %{latency: latency, status: 'up'})
-        {:ok, {false, latency}} -> Monitors.update_status(host, %{latency: latency, status: 'down'})
+        {:ok, {true, latency}} -> Monitors.update_status(host, %{latency: latency, status: "up"})
+        {:ok, {false, latency}} -> Monitors.update_status(host, %{latency: latency, status: "down"})
         {:error, e} -> IO.puts "ERROR #{e.message}"
       end
     end
