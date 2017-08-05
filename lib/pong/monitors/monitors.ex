@@ -101,10 +101,4 @@ defmodule Pong.Monitors do
   def change_host(%Host{} = host) do
     Host.changeset(host, %{})
   end
-
-  def update_status(%Host{} = host, attr) do
-    host
-    |>Host.status_changeset(attr)
-    |>Repo.update()
-  end
 end

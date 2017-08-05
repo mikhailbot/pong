@@ -1,13 +1,14 @@
 defmodule Pong.Repo.Migrations.CreateHosts do
+  @moduledoc """
+  Create Hosts Migration
+  """
+
   use Ecto.Migration
 
   def change do
     create table(:hosts) do
       add :name, :string
       add :ip_address, :string
-      add :status, :string
-      add :latency, :integer
-      add :check_frequency, :integer
 
       timestamps()
     end

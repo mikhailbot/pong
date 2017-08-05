@@ -9,11 +9,9 @@ defmodule Pong.MonitorsTest do
   describe "hosts" do
     alias Pong.Monitors.Host
 
-    @valid_attrs %{check_frequency: 42, ip_address: "8.8.8.8", latency: 42, name: "some name", status: "some status"}
-    @update_attrs %{check_frequency: 43, ip_address: "8.8.4.4", latency: 43, name: "some updated name", status: "some updated status"}
-    @invalid_attrs %{check_frequency: nil, ip_address: nil, latency: nil, name: nil, status: nil}
-    @status_attrs %{latency: 44, status: "up"}
-    @status_invalid_attrs %{latency: "44", status: 44}
+    @valid_attrs %{ip_address: "8.8.8.8", name: "some name"}
+    @update_attrs %{ip_address: "8.8.4.4", name: "some updated name"}
+    @invalid_attrs %{ip_address: nil, name: nil}
 
     def host_fixture(attrs \\ %{}) do
       {:ok, host} =
@@ -36,7 +34,6 @@ defmodule Pong.MonitorsTest do
 
     test "create_host/1 with valid data creates a host" do
       assert {:ok, %Host{} = host} = Monitors.create_host(@valid_attrs)
-      assert host.check_frequency == 42
       assert host.ip_address == "8.8.8.8"
       assert host.name == "some name"
     end
@@ -49,7 +46,6 @@ defmodule Pong.MonitorsTest do
       host = host_fixture()
       assert {:ok, host} = Monitors.update_host(host, @update_attrs)
       assert %Host{} = host
-      assert host.check_frequency == 43
       assert host.ip_address == "8.8.4.4"
       assert host.name == "some updated name"
     end
@@ -69,20 +65,6 @@ defmodule Pong.MonitorsTest do
     test "change_host/1 returns a host changeset" do
       host = host_fixture()
       assert %Ecto.Changeset{} = Monitors.change_host(host)
-    end
-
-    test "update_status/2 with valid data updates the host" do
-      host = host_fixture()
-      assert {:ok, host} = Monitors.update_status(host, @status_attrs)
-      assert %Host{} = host
-      assert host.latency == 44
-      assert host.status == "up"
-    end
-
-    test "update_status/2 with invalid data returns error changeset" do
-      host = host_fixture()
-      assert {:error, %Ecto.Changeset{}} = Monitors.update_status(host, @status_invalid_attrs)
-      assert host == Monitors.get_host!(host.id)
     end
   end
 end
