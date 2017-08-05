@@ -6,7 +6,7 @@ defmodule Pong.Monitors do
   import Ecto.Query, warn: false
 
   alias Pong.Repo
-  alias Pong.Monitors.Host
+  alias Pong.Monitors.{Host, Check}
 
   @doc """
   Returns the list of hosts.
@@ -100,5 +100,23 @@ defmodule Pong.Monitors do
   """
   def change_host(%Host{} = host) do
     Host.changeset(host, %{})
+  end
+
+  @doc """
+  Creates a Check.
+
+  ## Examples
+
+      iex> create_check(%{field: value})
+      {:ok, %Check{}}
+
+      iex> create_host(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_check(attrs \\ %{}) do
+    %Check{}
+    |> Check.changeset(attrs)
+    |> Repo.insert()
   end
 end

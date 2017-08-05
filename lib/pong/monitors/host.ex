@@ -11,6 +11,7 @@ defmodule Pong.Monitors.Host do
   schema "hosts" do
     field :ip_address, IPv4
     field :name, :string
+    has_many :checks, Pong.Monitors.Check
 
     timestamps()
   end

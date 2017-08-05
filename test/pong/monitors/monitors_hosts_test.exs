@@ -1,4 +1,4 @@
-defmodule Pong.MonitorsTest do
+defmodule Pong.MonitorsHostsTest do
   @moduledoc """
   """
 
