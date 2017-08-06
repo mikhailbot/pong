@@ -5,9 +5,6 @@
     <tr>
       <th>Name</th>
       <th>Ip address</th>
-      <th>Status</th>
-      <th>Latency</th>
-      <th>Check frequency</th>
 
       <th></th>
     </tr>
@@ -17,9 +14,6 @@
     <tr>
       <td><%= host.name %></td>
       <td><%= host.ip_address %></td>
-      <td><%= host.status %></td>
-      <td><%= host.latency %></td>
-      <td><%= host.check_frequency %></td>
 
       <td class="text-right">
         <span><%= link "Show", to: host_path(@conn, :show, host), class: "btn btn-default btn-xs" %></span>
