@@ -10,7 +10,7 @@ defmodule Pong.Monitors.Ping do
 
   def check_host(ip_address) do
     # This is a Ruby-ish way of dealing with failure...
-    # TODO: Discover the "Elixir way"
+    # Discover the "Elixir way"
     try do
       # return code should be handled somehow with pattern matching
       {cmd_output, _} = System.cmd("ping", ping_args(ip_address))
@@ -19,13 +19,13 @@ defmodule Pong.Monitors.Ping do
 
       latency =
         case Regex.run(~r/(?<=time=)(.*)(?=\.)/, cmd_output) do
-          [ _ | timeout ] -> String.to_integer(Enum.fetch!(timeout, 0))
+          [_ | timeout] -> String.to_integer(Enum.fetch!(timeout, 0))
           _ -> 0
         end
 
       # IO.inspect latency
 
-      {:ok, { alive?, latency }}
+      {:ok, {alive?, latency}}
     rescue
       e -> {:error, e}
     end

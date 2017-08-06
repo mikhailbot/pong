@@ -1,5 +1,5 @@
 defmodule Pong.Monitors.IPv4 do
-  @doc """
+  @moduledoc """
   Custom Ecto type for IPv4 Address
   https://github.com/jerel/ecto_fields/blob/master/lib/fields/ip4.ex
   """

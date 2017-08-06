@@ -1,4 +1,8 @@
 defmodule Pong.Application do
+  @moduledoc """
+  Pong Application
+  """
+
   use Application
 
   # See https://hexdocs.pm/elixir/Application.html
