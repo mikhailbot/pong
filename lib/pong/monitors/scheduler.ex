@@ -33,7 +33,10 @@ defmodule Pong.Monitors.Scheduler do
         {:ok, {false, latency}} -> Monitors.create_check(host, %{latency: latency})
         {:error, e} -> IO.puts "ERROR #{e.message}"
       end
+
+      Pong.Reports.Status.is_up?(host)
     end
+
 
     schedule_work()
     {:noreply, state}

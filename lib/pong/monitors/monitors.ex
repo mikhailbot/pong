@@ -124,4 +124,12 @@ defmodule Pong.Monitors do
         {:ok, check}
     end
   end
+
+  def get_latest_checks(%Host{} = host, count) do
+    checks_query = from c in Check, limit: ^count
+
+    Repo.all from h in Host,
+      where: h.id == ^host.id,
+      preload: [checks: ^checks_query]
+  end
 end
