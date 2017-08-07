@@ -126,9 +126,9 @@ defmodule Pong.Monitors do
   end
 
   def get_latest_checks(%Host{} = host, count) do
-    checks_query = from c in Check, limit: ^count
+    checks_query = from c in Check, order_by: [desc: c.id], limit: ^count
 
-    Repo.all from h in Host,
+    Repo.one from h in Host,
       where: h.id == ^host.id,
       preload: [checks: ^checks_query]
   end

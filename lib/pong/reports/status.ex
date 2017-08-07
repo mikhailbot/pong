@@ -8,11 +8,17 @@ defmodule Pong.Reports.Status do
     host
     |> Monitors.get_latest_checks(3)
     |> get_checks
-    # |> Enum.all?(fn(check) -> check.latency > 0 end)
+    |> Enum.all?(fn(check) -> check.latency > 0 end)
+  end
+
+  def is_down?(host) do
+    host
+    |> Monitors.get_latest_checks(3)
+    |> get_checks
+    |> Enum.all?(fn(check) -> check.latency == 0 end)
   end
 
   defp get_checks (host_with_checks) do
-    IO.inspect host_with_checks
-    IO.puts host_with_checks.name
+    host_with_checks.checks
   end
 end
