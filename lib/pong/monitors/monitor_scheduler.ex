@@ -35,7 +35,6 @@ defmodule Pong.Monitors.MonitorScheduler do
       end
     end
 
-
     schedule_work()
     {:noreply, state}
   end

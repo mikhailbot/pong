@@ -25,6 +25,7 @@ defmodule Pong.Monitors.Host do
     |> unique_constraint(:ip_address)
   end
 
+  @doc false
   def update_changeset(%Host{} = host, attrs) do
     host
     |> cast(attrs, [:status, :name, :ip_address])
