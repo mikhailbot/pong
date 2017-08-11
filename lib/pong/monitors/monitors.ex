@@ -69,7 +69,7 @@ defmodule Pong.Monitors do
   """
   def update_host(%Host{} = host, attrs) do
     host
-    |> Host.changeset(attrs)
+    |> Host.update_changeset(attrs)
     |> Repo.update()
   end
 

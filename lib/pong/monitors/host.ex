@@ -11,6 +11,7 @@ defmodule Pong.Monitors.Host do
   schema "hosts" do
     field :ip_address, IPv4
     field :name, :string
+    field :status, :string
     has_many :checks, Pong.Monitors.Check
 
     timestamps()
@@ -22,5 +23,10 @@ defmodule Pong.Monitors.Host do
     |> cast(attrs, [:name, :ip_address])
     |> validate_required([:name, :ip_address])
     |> unique_constraint(:ip_address)
+  end
+
+  def update_changeset(%Host{} = host, attrs) do
+    host
+    |> cast(attrs, [:status, :name, :ip_address])
   end
 end
