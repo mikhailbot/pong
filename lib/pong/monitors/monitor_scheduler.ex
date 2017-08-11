@@ -1,4 +1,4 @@
-defmodule Pong.Monitors.Scheduler do
+defmodule Pong.Monitors.MonitorScheduler do
   @moduledoc """
   GenServer to schedule checking hosts
   """
