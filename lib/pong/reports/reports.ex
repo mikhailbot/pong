@@ -3,8 +3,10 @@ defmodule Pong.Reports do
   Reports Context
   """
 
+  alias Pong.Repo
   alias Pong.Monitors
-  alias Pong.Reports.Status
+  alias Pong.Reports
+  alias Pong.Reports.{Status, Event}
 
   def check_status(host) do
     case host.status do
@@ -33,12 +35,22 @@ defmodule Pong.Reports do
     with true <- Status.is_up?(host) do
       Monitors.update_host(host, %{status: "up"})
       IO.puts "#{host.name} IS NOW UP!"
+      Reports.create_event(%{host_id: host.id, status: "up"})
+      # Host is back up so send notification email
     else
       false ->
         with true <- Status.is_down?(host) do
           Monitors.update_host(host, %{status: "down"})
           IO.puts "#{host.name} IS NOW DOWN!"
+          Reports.create_event(%{host_id: host.id, status: "down"})
+          # Host has gone down so send notification email
         end
     end
+  end
+
+  def create_event(attrs \\ %{}) do
+    %Event{}
+    |> Event.changeset(attrs)
+    |> Repo.insert()
   end
 end

@@ -13,6 +13,7 @@ defmodule Pong.Monitors.Host do
     field :name, :string
     field :status, :string
     has_many :checks, Pong.Monitors.Check
+    has_many :events, Pong.Reports.Event
 
     timestamps()
   end
