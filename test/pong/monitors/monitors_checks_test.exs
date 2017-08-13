@@ -7,7 +7,7 @@ defmodule Pong.MonitorsChecksTest do
   alias Pong.Monitors
 
   describe "checks" do
-    alias Pong.Monitors.Check
+    alias Pong.Monitors.{Host, Check}
 
     @valid_attrs %{latency: 42}
     @valid_host_attrs %{ip_address: "8.8.8.8", name: "some name"}
@@ -26,6 +26,17 @@ defmodule Pong.MonitorsChecksTest do
 
       assert {:ok, %Check{} = check} = Monitors.create_check(host, @valid_attrs)
       assert check.latency == 42
+    end
+
+    test "get_latest_checks/2 returns correct number of checks" do
+      host = host_fixture()
+
+      for _ <- 0..4 do
+        Monitors.create_check(host, @valid_attrs)
+      end
+
+      assert %Host{} = return_host = Monitors.get_latest_checks(host, 3)
+      assert 3 = length(return_host.checks )
     end
   end
 end
