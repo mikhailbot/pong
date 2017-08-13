@@ -1,11 +1,13 @@
 defmodule PongWeb.HostControllerTest do
+  @moduledoc false
+
   use PongWeb.ConnCase
 
   alias Pong.Monitors
 
-  @create_attrs %{check_frequency: 42, ip_address: "8.8.8.8", latency: 42, name: "some name", status: "some status"}
-  @update_attrs %{check_frequency: 43, ip_address: "8.8.4.4", latency: 43, name: "some updated name", status: "some updated status"}
-  @invalid_attrs %{check_frequency: nil, ip_address: nil, latency: nil, name: nil, status: nil}
+  @create_attrs %{ip_address: "8.8.8.8", name: "some name"}
+  @update_attrs %{ip_address: "8.8.4.4", name: "some updated name", status: "some updated status"}
+  @invalid_attrs %{ip_address: 1, name: 2, status: 3}
 
   def fixture(:host) do
     {:ok, host} = Monitors.create_host(@create_attrs)

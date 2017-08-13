@@ -7,7 +7,6 @@ defmodule Pong.Reports.ReportScheduler do
 
   alias Pong.Monitors
   alias Pong.Reports
-  alias Pong.Reports.Status
 
   # Client API
 

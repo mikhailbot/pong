@@ -11,7 +11,7 @@ defmodule Pong.Monitors.Host do
   schema "hosts" do
     field :ip_address, IPv4
     field :name, :string
-    field :status, :string
+    field :status, :string, default: "unknown"
     has_many :checks, Pong.Monitors.Check
     has_many :events, Pong.Reports.Event
 

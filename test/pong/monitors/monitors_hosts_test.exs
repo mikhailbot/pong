@@ -11,7 +11,7 @@ defmodule Pong.MonitorsHostsTest do
 
     @valid_attrs %{ip_address: "8.8.8.8", name: "some name"}
     @update_attrs %{ip_address: "8.8.4.4", name: "some updated name"}
-    @invalid_attrs %{ip_address: nil, name: nil}
+    @invalid_attrs %{ip_address: 1, name: 2}
 
     def host_fixture(attrs \\ %{}) do
       {:ok, host} =
