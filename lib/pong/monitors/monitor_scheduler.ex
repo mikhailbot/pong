@@ -40,6 +40,6 @@ defmodule Pong.Monitors.MonitorScheduler do
   end
 
   defp schedule_work do
-    Process.send_after(self(), :ping, 10 * 1000) # In 5 minutes
+    Process.send_after(self(), :ping, System.get_env("MONITOR_SCHEDULER_INTERVAL") |> String.to_integer)
   end
 end
