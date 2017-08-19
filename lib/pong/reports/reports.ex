@@ -4,8 +4,7 @@ defmodule Pong.Reports do
   """
 
   alias Pong.Repo
-  alias Pong.Monitors
-  alias Pong.Reports
+  alias Pong.{Monitors, Reports, Mailer}
   alias Pong.Reports.{Status, Event}
 
   def check_status(host) do
@@ -36,14 +35,14 @@ defmodule Pong.Reports do
       Monitors.update_host(host, %{status: "up"})
       IO.puts "#{host.name} IS NOW UP!"
       Reports.create_event(%{host_id: host.id, status: "up"})
-      # Host is back up so send notification email
+      Mailer.send_up_notice
     else
       false ->
         with true <- Status.is_down?(host) do
           Monitors.update_host(host, %{status: "down"})
           IO.puts "#{host.name} IS NOW DOWN!"
           Reports.create_event(%{host_id: host.id, status: "down"})
-          # Host has gone down so send notification email
+          Mailer.send_down_notice
         end
     end
   end

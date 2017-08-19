@@ -20,4 +20,9 @@ A local `.env` file can be created to load environmental variables.
 
 export MONITOR_SCHEDULER_INTERVAL="300000"
 export REPORT_SCHEDULER_INTERVAL="300000"
+
+export SMTP_DOMAIN=smtp.mailtrap.io
+export SMTP_PORT=2525
+export SMTP_USERNAME=abcdef1234
+export SMTP_PASSWORD=1234abcdef
 ```
