@@ -17,3 +17,6 @@ config :pong, Pong.Repo,
   database: "pong_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
+
+config :pong, Pong.Mailer,
+  adapter: Bamboo.TestAdapter
