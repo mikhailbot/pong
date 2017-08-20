@@ -25,4 +25,6 @@ export SMTP_DOMAIN=smtp.mailtrap.io
 export SMTP_PORT=2525
 export SMTP_USERNAME=abcdef1234
 export SMTP_PASSWORD=1234abcdef
+
+export NOTIFY_EMAIL=foo@example.com
 ```

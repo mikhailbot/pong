@@ -7,22 +7,22 @@ defmodule Pong.Mailer.Email do
   use Bamboo.Phoenix, view: PongWeb.EmailView
 
   def generate_down_notice(host) do
-    base_email
+    base_email()
     |> subject("#{host.name} is down!")
     |> assign(:host, host)
     |> render(:host_down)
   end
 
   def generate_up_notice(host) do
-    base_email
+    base_email()
     |> subject("#{host.name} is back up!")
     |> assign(:host, host)
     |> render(:host_up)
   end
 
   defp base_email do
-    new_email
-    |> to("foo@emample.com")
+    new_email()
+    |> to(System.get_env("NOTIFY_EMAIL"))
     |> from("Ping Monitor <pong@monitor.pri>")
     |> put_html_layout({PongWeb.LayoutView, "email.html"})
   end
