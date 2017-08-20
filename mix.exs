@@ -43,7 +43,8 @@ defmodule Pong.Mixfile do
       {:cowboy, "~> 1.0"},
       {:credo, "~> 0.8", only: [:dev, :test], runtime: false},
       {:bamboo, "~> 0.8"},
-      {:bamboo_smtp, "~> 1.4.0"}
+      {:bamboo_smtp, "~> 1.4.0"},
+      {:phoenix_mjml, "~> 0.1.0"}
     ]
   end
 

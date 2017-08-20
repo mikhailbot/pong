@@ -4,21 +4,26 @@ defmodule Pong.Mailer.Email do
   """
   import Bamboo.Email
 
-  def down_notice do
-    new_email()
-    |> to("foo@example.com")
-    |> from("me@example.com")
-    |> subject("Down!!!")
-    |> html_body("<strong>Something went down!</strong>")
-    |> text_body("Something went down!")
+  use Bamboo.Phoenix, view: PongWeb.EmailView
+
+  def generate_down_notice(host) do
+    base_email
+    |> subject("#{host.name} is down!")
+    |> assign(:host, host)
+    |> render(:host_down)
   end
 
-  def up_notice do
-    new_email()
-    |> to("foo@example.com")
-    |> from("me@example.com")
-    |> subject("Up!!!")
-    |> html_body("<strong>Something came up!</strong>")
-    |> text_body("Something came up!")
+  def generate_up_notice(host) do
+    base_email
+    |> subject("#{host.name} is back up!")
+    |> assign(:host, host)
+    |> render(:host_up)
+  end
+
+  defp base_email do
+    new_email
+    |> to("foo@emample.com")
+    |> from("Ping Monitor <pong@monitor.pri>")
+    |> put_html_layout({PongWeb.LayoutView, "email.html"})
   end
 end

@@ -35,14 +35,14 @@ defmodule Pong.Reports do
       Monitors.update_host(host, %{status: "up"})
       IO.puts "#{host.name} IS NOW UP!"
       Reports.create_event(%{host_id: host.id, status: "up"})
-      Mailer.send_up_notice
+      Mailer.send_up_notice(host)
     else
       false ->
         with true <- Status.is_down?(host) do
           Monitors.update_host(host, %{status: "down"})
           IO.puts "#{host.name} IS NOW DOWN!"
           Reports.create_event(%{host_id: host.id, status: "down"})
-          Mailer.send_down_notice
+          Mailer.send_down_notice(host)
         end
     end
   end

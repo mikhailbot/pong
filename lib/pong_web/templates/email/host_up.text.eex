@@ -1,0 +1,1 @@
+<%= @host.name %> is back up!

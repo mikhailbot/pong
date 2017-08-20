@@ -7,13 +7,15 @@ defmodule Pong.Mailer do
   alias Pong.Mailer
   alias Pong.Mailer.Email
 
-  def send_down_notice do
-    Email.down_notice
+  def send_down_notice(host) do
+    host
+    |> Email.generate_down_notice
     |> Mailer.deliver_now
   end
 
-  def send_up_notice do
-    Email.up_notice
+  def send_up_notice(host) do
+    host
+    |> Email.generate_up_notice
     |> Mailer.deliver_now
   end
 end
