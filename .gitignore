@@ -28,3 +28,6 @@ npm-debug.log
 
 # ENV files
 /*.env
+
+# Redis dump
+*.rdb
