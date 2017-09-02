@@ -38,6 +38,14 @@ config :pong, Pong.Mailer,
 config :phoenix, :template_engines,
   mjml: PhoenixMjml.Engine
 
+# Configures Quantum schedule
+config :pong, Pong.Scheduler,
+  jobs: [
+    # Every minute
+    {"* * * * *", {Pong.Monitors, :check_hosts, []}}, # Ping all hosts every minute
+    {"* * * * *", {Pong.Reports, :get_status, []}} # Check status of all hosts every minute
+  ]
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"

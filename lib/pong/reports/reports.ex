@@ -16,6 +16,14 @@ defmodule Pong.Reports do
     end
   end
 
+  def get_status do
+    hosts = Monitors.list_hosts
+
+    for host <- hosts do
+      Reports.check_status(host)
+    end
+  end
+
   defp check_still_up(host) do
     case Status.is_up?(host) do
       false -> Monitors.update_host(host, %{status: "unknown"})

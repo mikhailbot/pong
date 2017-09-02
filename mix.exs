@@ -44,7 +44,9 @@ defmodule Pong.Mixfile do
       {:credo, "~> 0.8", only: [:dev, :test], runtime: false},
       {:bamboo, "~> 0.8"},
       {:bamboo_smtp, "~> 1.4.0"},
-      {:phoenix_mjml, "~> 0.1.0"}
+      {:phoenix_mjml, "~> 0.1.0"},
+      {:quantum, "~> 2.0.2"},
+      {:timex, "~> 3.0"}
     ]
   end
 
