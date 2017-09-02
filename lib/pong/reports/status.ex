@@ -3,7 +3,7 @@ defmodule Pong.Reports.Status do
   Module to check the status of a host
   """
 
-  alias Pong.{Monitors, Redis}
+  alias Pong.Redis
 
   def is_up?(host) do
     case get_checks(host) do
