@@ -23,9 +23,7 @@ defmodule Pong.Monitors.Ping do
           _ -> 0
         end
 
-      # IO.inspect latency
-
-      {:ok, {alive?, latency}}
+      {:ok, {ip_address, :os.system_time(:seconds), latency}}
     rescue
       e -> {:error, e}
     end

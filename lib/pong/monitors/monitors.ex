@@ -5,8 +5,7 @@ defmodule Pong.Monitors do
 
   import Ecto.Query, warn: false
 
-  alias Pong.Repo
-  alias Pong.Monitors
+  alias Pong.{Repo, Monitors, Redis}
   alias Pong.Monitors.{Host, Check, Ping}
 
   @doc """
@@ -135,14 +134,8 @@ defmodule Pong.Monitors do
   end
 
   def check_hosts do
-    hosts = Monitors.list_hosts
-
-    for host <- hosts do
-      case Ping.check_host(host.ip_address) do
-        {:ok, {true, latency}} -> Monitors.create_check(host, %{latency: latency})
-        {:ok, {false, latency}} -> Monitors.create_check(host, %{latency: latency})
-        {:error, e} -> IO.puts "ERROR #{e.message}"
-      end
-    end
+    Monitors.list_hosts
+    |> Enum.map(fn (host) -> Ping.check_host(host.ip_address) end)
+    |> Redis.create_checks
   end
 end

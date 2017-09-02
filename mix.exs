@@ -20,7 +20,7 @@ defmodule Pong.Mixfile do
   def application do
     [
       mod: {Pong.Application, []},
-      extra_applications: [:logger, :runtime_tools, :bamboo, :bamboo_smtp]
+      extra_applications: [:logger, :runtime_tools, :bamboo, :bamboo_smtp, :redix]
     ]
   end
 
@@ -46,7 +46,8 @@ defmodule Pong.Mixfile do
       {:bamboo_smtp, "~> 1.4.0"},
       {:phoenix_mjml, "~> 0.1.0"},
       {:quantum, "~> 2.0.2"},
-      {:timex, "~> 3.0"}
+      {:timex, "~> 3.0"},
+      {:redix, ">= 0.0.0"}
     ]
   end
 
