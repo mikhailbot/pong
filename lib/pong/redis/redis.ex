@@ -17,7 +17,7 @@ defmodule Pong.Redis do
 
   defp generate_redis_check_input(check) do
     { ip, time, latency } = check
-    ["ZADD", "checks:#{ip}", time, latency]
+    ["ZADD", "checks:#{ip}", time, "#{time}:#{latency}"]
   end
 
   def get_latest_checks(host) do
