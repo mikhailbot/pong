@@ -3,6 +3,9 @@ defmodule Pong.Redis do
   The Redis context
   """
 
+  alias Pong.Monitors
+  alias Pong.Monitors.Host
+
   def create_checks(checks) do
     redis_data =
       checks
@@ -26,5 +29,20 @@ defmodule Pong.Redis do
     Redix.stop(conn)
 
     results
+  end
+
+  def delete_old_checks do
+    redis_data =
+      Monitors.list_hosts
+      |> Enum.map(fn (host) -> generate_redis_remove_input(host) end)
+
+    {:ok, conn} = Redix.start_link()
+    Redix.pipeline!(conn, redis_data)
+    Redix.stop(conn)
+  end
+
+  defp generate_redis_remove_input(%Host{} = host) do
+    fourteen_days_ago = :os.system_time(:seconds) - 1_209_600
+    ["ZREMRANGEBYSCORE", "checks:#{host.ip_address}", 0, fourteen_days_ago]
   end
 end
