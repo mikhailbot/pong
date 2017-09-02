@@ -7,20 +7,20 @@ defmodule Pong.Reports do
   alias Pong.{Monitors, Reports, Mailer}
   alias Pong.Reports.{Status, Event}
 
+  def check_status do
+    hosts = Monitors.list_hosts
+
+    for host <- hosts do
+      Reports.check_status(host)
+    end
+  end
+
   def check_status(host) do
     case host.status do
       "up" -> check_still_up(host)
       "down" -> check_still_down(host)
       "unknown" -> check_status_changed(host)
       _ -> IO.puts "ERROR with #{host.name}"
-    end
-  end
-
-  def get_status do
-    hosts = Monitors.list_hosts
-
-    for host <- hosts do
-      Reports.check_status(host)
     end
   end
 

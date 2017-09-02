@@ -43,7 +43,7 @@ config :pong, Pong.Scheduler,
   jobs: [
     # Every minute
     {"* * * * *", {Pong.Monitors, :check_hosts, []}}, # Ping all hosts every minute
-    {"* * * * *", {Pong.Reports, :get_status, []}} # Check status of all hosts every minute
+    {"* * * * *", {Pong.Reports, :check_status, []}} # Check status of all hosts every minute
   ]
 
 # Import environment specific config. This must remain at the bottom
