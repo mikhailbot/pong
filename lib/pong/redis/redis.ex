@@ -16,7 +16,7 @@ defmodule Pong.Redis do
   end
 
   defp generate_redis_check_input(check) do
-    { ip, time, latency } = check
+    {ip, time, latency} = check
     ["ZADD", "checks:#{ip}", time, "#{time}:#{latency}"]
   end
 
