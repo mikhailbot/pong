@@ -31,3 +31,6 @@ npm-debug.log
 
 # Redis dump
 *.rdb
+
+# MacOS Things
+.DS_Store

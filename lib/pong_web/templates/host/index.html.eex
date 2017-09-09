@@ -1,28 +1,19 @@
-<h2>Listing Hosts</h2>
+<h2 class="h1 pl2 bold">Listing Hosts</h2>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Ip address</th>
-
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-<%= for host <- @hosts do %>
-    <tr>
-      <td><%= host.name %></td>
-      <td><%= host.ip_address %></td>
-
-      <td class="text-right">
-        <span><%= link "Show", to: host_path(@conn, :show, host), class: "btn btn-default btn-xs" %></span>
-        <span><%= link "Edit", to: host_path(@conn, :edit, host), class: "btn btn-default btn-xs" %></span>
-        <span><%= link "Delete", to: host_path(@conn, :delete, host), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
-      </td>
-    </tr>
-<% end %>
-  </tbody>
-</table>
-
-<span><%= link "New Host", to: host_path(@conn, :new) %></span>
+<section>
+  <%= for host <- @hosts do %>
+    <div class="flex items-center mb1 border-bottom border-gray">
+      <div class="p2 col-6">
+        <div>
+          <%= host.name %>
+        </div>
+      </div>
+      <div class="p2 col-4">
+        <%= host.ip_address %>
+      </div>
+      <div class="p1 mr2 col-2 bg-olive rounded center">
+        45ms
+      </div>
+    </div>
+  <% end %>
+</section>
