@@ -6,7 +6,7 @@ defmodule Pong.Monitors do
   import Ecto.Query, warn: false
 
   alias Pong.{Repo, Monitors, Redis}
-  alias Pong.Monitors.{Host, Check, Ping}
+  alias Pong.Monitors.{Host, Ping}
 
   @doc """
   Returns the list of hosts.
@@ -100,37 +100,6 @@ defmodule Pong.Monitors do
   """
   def change_host(%Host{} = host) do
     Host.changeset(host, %{})
-  end
-
-  @doc """
-  Creates a Check.
-
-  ## Examples
-
-      iex> create_check(%{field: value})
-      {:ok, %Check{}}
-
-      iex> create_host(%{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def create_check(%Host{} = host, attrs \\ %{}) do
-    attrs =
-      attrs
-      |> Map.put(:host_id, host.id)
-
-    with changeset <- Check.changeset(%Check{}, attrs),
-        {:ok, check} <- Repo.insert(changeset) do
-        {:ok, check}
-    end
-  end
-
-  def get_latest_checks(%Host{} = host, count) do
-    checks_query = from c in Check, order_by: [desc: c.id], limit: ^count
-
-    Repo.one from h in Host,
-      where: h.id == ^host.id,
-      preload: [checks: ^checks_query]
   end
 
   def check_hosts do
