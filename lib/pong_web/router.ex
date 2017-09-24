@@ -18,6 +18,6 @@ defmodule PongWeb.Router do
 
     get "/", HostController, :index
 
-    # resources "/hosts", HostController
+    resources "/hosts", HostController
   end
 end

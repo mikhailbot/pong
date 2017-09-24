@@ -1,5 +1,9 @@
 <section class="pl2 pr2 mw7 center">
   <p class="tc f6 gray i">A MVP release of the ping monitor for Epics and other hosts&mdash;more coming soon!</p>
+
+  <div class="pt3 tc">
+    <%= link "Add New Host", to: host_path(@conn, :new), class: "pointer grow bn br2 ba ph4 pv2 mb2 dib white bg-green no-underline ma"%>
+  </div>
 </section>
 <section class="mw6 center">
   <div class="list mt4 center">
