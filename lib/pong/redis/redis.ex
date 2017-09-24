@@ -45,4 +45,24 @@ defmodule Pong.Redis do
     fourteen_days_ago = :os.system_time(:seconds) - 1_209_600
     ["ZREMRANGEBYSCORE", "checks:#{host.ip_address}", 0, fourteen_days_ago]
   end
+
+  def get_latest_check(hosts) do
+    {:ok, conn} = Redix.start_link()
+
+    updated_hosts =
+      hosts
+      |> Enum.map(fn(host) ->
+        latency =
+          Redix.command!(conn, ["ZREVRANGE", "checks:#{host.ip_address}", 0, 0])
+          |> Enum.map(fn(check) -> String.split(check, ":") end)
+          |> Enum.map(fn(check) -> List.last(check) end)
+          |> Enum.at(0)
+
+        Map.put(host, :latency, latency)
+      end)
+
+    Redix.stop(conn)
+
+    updated_hosts
+  end
 end

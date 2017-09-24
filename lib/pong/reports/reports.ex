@@ -60,4 +60,9 @@ defmodule Pong.Reports do
     |> Event.changeset(attrs)
     |> Repo.insert()
   end
+
+  def check_latest_status(hosts) do
+    hosts
+    |> Status.get_latest
+  end
 end

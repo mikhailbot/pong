@@ -31,4 +31,10 @@ defmodule Pong.Reports.Status do
       _ -> {:error}
     end
   end
+
+  def get_latest(hosts) do
+    # Send list of hosts to Redis to get latency
+    hosts
+    |> Redis.get_latest_check
+  end
 end

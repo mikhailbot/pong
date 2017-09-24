@@ -5,7 +5,7 @@ defmodule PongWeb.HostController do
   alias Pong.Monitors.Host
 
   def index(conn, _params) do
-    hosts = Monitors.list_hosts()
+    hosts = Monitors.list_hosts_with_latency()
     render(conn, "index.html", hosts: hosts)
   end
 

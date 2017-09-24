@@ -5,7 +5,7 @@ defmodule Pong.Monitors do
 
   import Ecto.Query, warn: false
 
-  alias Pong.{Repo, Monitors, Redis}
+  alias Pong.{Repo, Monitors, Reports, Redis}
   alias Pong.Monitors.{Host, Ping}
 
   @doc """
@@ -19,6 +19,19 @@ defmodule Pong.Monitors do
   """
   def list_hosts do
     Repo.all(Host)
+  end
+
+  @doc """
+  Returns the list of hosts, with their latest latency
+  """
+
+  def list_hosts_with_latency do
+    query = from h in Host,
+      order_by: [asc: :id],
+      select: map(h, [:id, :name, :ip_address, :status])
+
+    Repo.all(query)
+    |> Reports.check_latest_status
   end
 
   @doc """
