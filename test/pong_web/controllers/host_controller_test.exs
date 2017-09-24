@@ -17,7 +17,7 @@ defmodule PongWeb.HostControllerTest do
   describe "index" do
     test "lists all hosts", %{conn: conn} do
       conn = get conn, host_path(conn, :index)
-      assert html_response(conn, 200) =~ "Listing Hosts"
+      assert html_response(conn, 200) =~ "Pong Monitor"
     end
   end
 
