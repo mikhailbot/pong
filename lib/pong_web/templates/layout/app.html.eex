@@ -18,11 +18,9 @@
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
 
       <nav class="dt w-100 mw7 center  border-box pa3 ph5-ns">
-        <a class="f3 dtc v-mid navy b link dim w-25" href="#" title="Home">Pong Monitor</a>
+        <a class="f3 dtc v-mid navy b link dim w-100 tc" href="/" title="Home">Pong Monitor</a>
         <div class="dtc v-mid w-75 tr">
-          <a class="link dim dark-gray f6 f5-ns dib mr3 mr4-ns" href="/" title="Dashboard">Dashboard</a>
-          <a class="link dim dark-gray f6 f5-ns dib mr3 mr4-ns" href="/hosts" title="Hosts">Hosts</a>
-          <a class="link dim dark-gray f6 f5-ns dib" href="/about" title="About">About</a>
+          <%# <a class="link dim dark-gray f6 f5-ns dib mr3 mr4-ns" href="/hosts" title="Hosts">Hosts</a> %>
         </div>
       </nav>
       <main role="main">
