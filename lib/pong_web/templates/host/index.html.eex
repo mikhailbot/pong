@@ -5,10 +5,10 @@
     <%= link "Add New Host", to: host_path(@conn, :new), class: "pointer grow bn br2 ba ph4 pv2 mb2 dib white bg-green no-underline ma"%>
   </div>
 </section>
-<section class="mw6 center">
+<section class="mw7 center">
   <div class="list mt4 center">
     <%= for host <- @hosts do %>
-      <a class="flex items-center lh-copy pa3 ph0-l bb b--black-10 bg-animate hover-bg-near-white no-underline">
+      <div class="flex items-center lh-copy pa3 ph0-l bb b--black-10 bg-animate hover-bg-near-white no-underline hide-child">
           <div class="pl3 flex-auto">
             <span class="db b black-90"><%= host.name %></span>
             <span class="db black-70"><%= host.ip_address %></span>
@@ -37,7 +37,13 @@
               </span>
           <% end %>
           </div>
-      </a>
+          <div class="ph3 child">
+            <div class="light-blue">
+              <%= link("View", to: host_path(@conn, :show, host.id), class: "bn bg-near-white blue f6 pointer dib no-underline") %> |
+              <%= link("Edit", to: host_path(@conn, :edit, host.id), class: "bn bg-near-white blue f6 pointer dib no-underline") %>
+            </div>
+          </div>
+      </div>
     <% end %>
   </div>
 </section>
