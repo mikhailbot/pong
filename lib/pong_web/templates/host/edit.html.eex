@@ -1,5 +1,5 @@
-<h2>Edit Host</h2>
+<section class="mw6 center">
+<h2>Edit <%= @host.name %></h2>
 
-<%= render "form.html", Map.put(assigns, :action, host_path(@conn, :update, @host)) %>
-
-<span><%= link "Back", to: host_path(@conn, :index) %></span>
+<%= render "edit_form.html", Map.put(assigns, :action, host_path(@conn, :update, @host)) %>
+</section>

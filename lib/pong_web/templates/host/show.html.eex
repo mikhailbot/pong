@@ -1,5 +1,5 @@
 <section class="mw7 center">
-  <div class="flex flex-wrap items-center justify-around mt4">
+  <div class="flex flex-wrap items-center justify-between mt4">
     <div class="flex justify-center pb2">
       <div class="f3 b pr2"><%= @host.name %></div>
       <div class="f3 pl2"><%= @host.ip_address %></div>
