@@ -24,11 +24,4 @@ defmodule Pong.Monitors.Host do
     |> validate_required([:name, :ip_address])
     |> unique_constraint(:ip_address)
   end
-
-  @doc false
-  def update_status_changeset(%Host{} = host, attrs) do
-    host
-    |> cast(attrs, [:status])
-    |> validate_required([:status])
-  end
 end

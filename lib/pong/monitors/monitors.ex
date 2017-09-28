@@ -88,8 +88,7 @@ defmodule Pong.Monitors do
 
   def update_host_status(%Host{} = host, attrs) do
     host
-    |> Host.update_status_changeset(attrs)
-    |> Repo.update()
+    |> Repo.update(attrs)
   end
 
   @doc """
