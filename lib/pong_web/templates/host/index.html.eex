@@ -1,19 +1,19 @@
-<section class="pl2 pr2 mw7 center">
+<section class="pl2 pr2 mw6 center">
   <p class="tc f6 gray i">A MVP release of the ping monitor for Epics and other hosts&mdash;more coming soon!</p>
 
   <div class="pt3 tc">
     <%= link "Add New Host", to: host_path(@conn, :new), class: "pointer bn br2 ba ph4 pv2 mb2 dib white bg-green no-underline ma"%>
   </div>
 </section>
-<section class="mw7 center">
+<section class="mw6 center">
   <div class="list mt4 center">
     <%= for host <- @hosts do %>
-      <div class="flex items-center lh-copy pa3 ph0-l bb b--black-10 bg-animate hover-bg-near-white no-underline hide-child">
-          <div class="pl3 flex-auto">
+      <a class="flex items-center lh-copy pa3 ph0-l bb b--black-10 bg-animate hover-bg-near-white no-underline" href="/hosts/<%= host.id %>">
+          <div class="pl4 flex-auto">
             <span class="db b black-90"><%= host.name %></span>
             <span class="db black-70"><%= host.ip_address %></span>
           </div>
-          <div class="pr3">
+          <div class="pr4">
           <%= cond do %>
             <% host.status == "up" -> %>
               <span class="b green"><%= host.latency %> ms</span>
@@ -37,13 +37,7 @@
               </span>
           <% end %>
           </div>
-          <div class="ph3 child">
-            <div class="light-blue">
-              <%= link("View", to: host_path(@conn, :show, host.id), class: "bn bg-near-white blue f6 pointer dib no-underline") %> |
-              <%= link("Edit", to: host_path(@conn, :edit, host.id), class: "bn bg-near-white blue f6 pointer dib no-underline") %>
-            </div>
-          </div>
-      </div>
+      </a>
     <% end %>
   </div>
 </section>
