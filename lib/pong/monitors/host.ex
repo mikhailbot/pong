@@ -26,8 +26,9 @@ defmodule Pong.Monitors.Host do
   end
 
   @doc false
-  def update_changeset(%Host{} = host, attrs) do
+  def update_status_changeset(%Host{} = host, attrs) do
     host
-    |> cast(attrs, [:status, :name, :ip_address])
+    |> cast(attrs, [:status])
+    |> validate_required([:status])
   end
 end

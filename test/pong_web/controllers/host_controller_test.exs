@@ -36,7 +36,7 @@ defmodule PongWeb.HostControllerTest do
       assert redirected_to(conn) == host_path(conn, :show, id)
 
       conn = get conn, host_path(conn, :show, id)
-      assert html_response(conn, 200) =~ "Show Host"
+      assert html_response(conn, 200) =~ "some name"
     end
 
     test "renders errors when data is invalid", %{conn: conn} do
@@ -50,7 +50,7 @@ defmodule PongWeb.HostControllerTest do
 
     test "renders form for editing chosen host", %{conn: conn, host: host} do
       conn = get conn, host_path(conn, :edit, host)
-      assert html_response(conn, 200) =~ "Edit Host"
+      assert html_response(conn, 200) =~ "Edit some name"
     end
   end
 
@@ -67,7 +67,7 @@ defmodule PongWeb.HostControllerTest do
 
     test "renders errors when data is invalid", %{conn: conn, host: host} do
       conn = put conn, host_path(conn, :update, host), host: @invalid_attrs
-      assert html_response(conn, 200) =~ "Edit Host"
+      assert html_response(conn, 200) =~ "Edit some name"
     end
   end
 

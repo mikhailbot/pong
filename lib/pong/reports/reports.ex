@@ -26,28 +26,28 @@ defmodule Pong.Reports do
 
   defp check_still_up(host) do
     case Status.is_up?(host) do
-      false -> Monitors.update_host(host, %{status: "unknown"})
+      false -> Monitors.update_host_status(host, %{status: "unknown"})
       _ -> IO.puts "#{host.name} is still up"
     end
   end
 
   defp check_still_down(host) do
     case Status.is_down?(host) do
-      false -> Monitors.update_host(host, %{status: "unknown"})
+      false -> Monitors.update_host_status(host, %{status: "unknown"})
       _ -> IO.puts "#{host.name} is still down"
     end
   end
 
   defp check_status_changed(host) do
     with true <- Status.is_up?(host) do
-      Monitors.update_host(host, %{status: "up"})
+      Monitors.update_host_status(host, %{status: "up"})
       IO.puts "#{host.name} IS NOW UP!"
       Reports.create_event(%{host_id: host.id, status: "up"})
       Mailer.send_up_notice(host)
     else
       false ->
         with true <- Status.is_down?(host) do
-          Monitors.update_host(host, %{status: "down"})
+          Monitors.update_host_status(host, %{status: "down"})
           IO.puts "#{host.name} IS NOW DOWN!"
           Reports.create_event(%{host_id: host.id, status: "down"})
           Mailer.send_down_notice(host)
