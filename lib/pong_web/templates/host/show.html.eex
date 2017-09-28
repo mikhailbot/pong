@@ -1,18 +1,15 @@
-<h2>Show Host</h2>
+<section class="mw7 center">
+  <div class="flex flex-wrap items-center justify-around mt4">
+    <div class="flex justify-center pb2">
+      <div class="f3 b pr2"><%= @host.name %></div>
+      <div class="f3 pl2"><%= @host.ip_address %></div>
+    </div>
+    <div>
+      <%= link "Edit Host", to: host_path(@conn, :edit, @host.id), class: "pointer bn br2 ba ph4 pv2 mb2 dib white bg-blue no-underline ma"%>
+    </div>
+  </div>
 
-<ul>
-
-  <li>
-    <strong>Name:</strong>
-    <%= @host.name %>
-  </li>
-
-  <li>
-    <strong>Ip address:</strong>
-    <%= @host.ip_address %>
-  </li>
-
-</ul>
-
-<span><%= link "Edit", to: host_path(@conn, :edit, @host) %></span>
-<span><%= link "Back", to: host_path(@conn, :index) %></span>
+  <div class="tc f6 gray i pt3">
+    <p>Some fancy graphs and info will go here...</p>
+  </div>
+</section>
