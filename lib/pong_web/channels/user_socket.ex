@@ -2,7 +2,7 @@ defmodule PongWeb.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  # channel "room:*", PongWeb.RoomChannel
+  channel "hosts", PongWeb.HostChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket

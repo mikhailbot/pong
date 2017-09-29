@@ -20,7 +20,7 @@ defmodule Pong.Monitors.Ping do
         _ -> 0
       end
 
-    {:ok, {ip_address, :os.system_time(:seconds), latency}}
+    {:ok, %{ip_address: ip_address, time: :os.system_time(:seconds), latency: latency}}
   rescue
     e -> {:error, e}
   end
