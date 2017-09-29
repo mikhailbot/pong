@@ -122,8 +122,20 @@ defmodule Pong.Monitors do
   end
 
   def check_hosts do
-    Monitors.list_hosts
+    checks =
+      Monitors.list_hosts
+      |> generate_checks
+
+    Redis.create_checks(checks)
+
+    html = Phoenix.View.render_to_string(PongWeb.HostView, "index.html", hosts: Monitors.list_hosts_with_latency())
+    PongWeb.Endpoint.broadcast("hosts", "update_html", %{html: html})
+  end
+
+  def generate_checks(hosts) do
+    hosts
     |> Enum.map(fn (host) -> Ping.check_host(host.ip_address) end)
-    |> Redis.create_checks
+    |> Enum.filter(&match?({:ok, _}, &1))
+    |> Keyword.values()
   end
 end

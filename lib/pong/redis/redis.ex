@@ -9,8 +9,6 @@ defmodule Pong.Redis do
   def create_checks(checks) do
     redis_data =
       checks
-      |> Enum.filter(fn {k, _} -> :ok == k end)
-      |> Enum.map(fn {_, v} -> v end)
       |> Enum.map(fn (check) -> generate_redis_check_input(check) end)
 
     {:ok, conn} = Redix.start_link()
@@ -19,8 +17,7 @@ defmodule Pong.Redis do
   end
 
   defp generate_redis_check_input(check) do
-    {ip, time, latency} = check
-    ["ZADD", "checks:#{ip}", time, "#{time}:#{latency}"]
+    ["ZADD", "checks:#{check.ip_address}", check.time, "#{check.time}:#{check.latency}"]
   end
 
   def get_latest_checks(host) do
