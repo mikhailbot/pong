@@ -3,7 +3,7 @@ defmodule Pong.Monitors do
   Monitors Context
   """
 
-  import Ecto.Query, warn: false
+  import Ecto.{Query, Changeset}, warn: false
 
   alias Pong.{Repo, Monitors, Reports, Redis}
   alias Pong.Monitors.{Host, Ping}
@@ -86,9 +86,10 @@ defmodule Pong.Monitors do
     |> Repo.update()
   end
 
-  def update_host_status(%Host{} = host, attrs) do
+  def update_host_status(%Host{} = host, status) do
     host
-    |> Repo.update(attrs)
+    |> change(status)
+    |> Repo.update()
   end
 
   @doc """
