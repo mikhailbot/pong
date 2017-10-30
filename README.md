@@ -28,3 +28,7 @@ export NOTIFY_EMAIL=foo@example.com
 ### Redis
 
 Right now it's looking for a locally running Redis server with no authentication.
+
+---
+
+Look to remove redis as a dependency
